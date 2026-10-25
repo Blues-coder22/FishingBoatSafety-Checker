@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fishing Boat Safety Dashboard</title>
+  <link rel="stylesheet" href="style (1).css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 15h18l-2.5 4.5a2 2 0 0 1-1.7 1H7.2a2 2 0 0 1-1.7-1L3 15z" fill="currentColor"/>
+        <path d="M12 3v10M12 4l6 8h-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <h1>Fishing Boat Safety Dashboard</h1>
+        <p>Check-in and alert network &middot; Lake Victoria (simulated)</p>
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <div class="mode-switch" role="group" aria-label="Data source">
+        <button id="modeDemo" class="mode-btn active" type="button">Demo</button>
+        <button id="modeLive" class="mode-btn" type="button">Live</button>
+      </div>
+      <div class="conn" id="connBadge">
+        <span class="dot" id="connDot"></span>
+        <span id="connText">Demo mode</span>
+      </div>
+      <div class="clock" id="clock">--:--:--</div>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <section class="stats" aria-label="Fleet summary">
+      <div class="stat">
+        <span class="stat-label">Boats tracked</span>
+        <span class="stat-value" id="statTotal">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Active</span>
+        <span class="stat-value ok" id="statActive">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Overdue</span>
+        <span class="stat-value warn" id="statOverdue">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Distress</span>
+        <span class="stat-value danger" id="statDistress">0</span>
+      </div>
+    </section>
+
+    <section class="panel boats-panel" aria-labelledby="boatsTitle">
+      <div class="panel-head">
+        <h2 id="boatsTitle">Boat status</h2>
+        <span class="hint" id="boatsHint">Heartbeat every 3 s &middot; overdue after 10 s</span>
+        <button class="btn solid" id="registerBtn" type="button">+ Register boat</button>
+      </div>
+      <div class="boat-grid" id="boatGrid"></div>
+      <p class="empty" id="boatsEmpty">No boats have reported yet.</p>
+    </section>
+
+    <aside class="panel feed-panel" aria-labelledby="feedTitle">
+      <div class="panel-head">
+        <h2 id="feedTitle">Live alert feed</h2>
+        <button class="link-btn" id="clearFeed" type="button">Clear</button>
+      </div>
+      <ul class="feed" id="feed" aria-live="polite"></ul>
+      <p class="empty" id="feedEmpty">No alerts yet.</p>
+    </aside>
+
+  </main>
+
+  <dialog id="detailsDialog" class="dialog">
+    <form id="detailsForm" method="dialog" autocomplete="off">
+      <h2 id="formTitle">Boat details</h2>
+      <div class="form-grid">
+        <label>Boat ID *
+          <input name="boat_id" maxlength="20" required placeholder="BOAT001">
+        </label>
+        <label>Boat name
+          <input name="boat_name" maxlength="60">
+        </label>
+        <label>Registration no.
+          <input name="registration_no" maxlength="30">
+        </label>
+        <label>Captain
+          <input name="captain" maxlength="60">
+        </label>
+        <label>Owner
+          <input name="owner" maxlength="60">
+        </label>
+        <label>Phone
+          <input name="phone" maxlength="20" inputmode="tel">
+        </label>
+        <label>Crew count
+          <input name="crew_count" type="number" min="0" max="99" step="1">
+        </label>
+        <label>Landing site
+          <input name="landing_site" maxlength="60">
+        </label>
+      </div>
+      <p class="form-msg" id="formMsg" role="status"></p>
+      <div class="form-actions">
+        <button type="button" class="btn" id="formCancel">Cancel</button>
+        <button type="submit" class="btn solid" id="formSave">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <footer class="footer">
+    Educational prototype with simulated boats. A missed heartbeat is a possible concern, not proof of an emergency.
+    Not a substitute for certified maritime safety equipment.
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

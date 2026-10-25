@@ -1,0 +1,8 @@
+{
+  "name": "fishing-boat-bridge",
+  "version": "1.0.0",
+  "description": "Bridge between the C++ Winsock server, the web dashboard (WebSocket) and MySQL (XAMPP)",
+  "main": "bridge.js",
+  "scripts": { "start": "node bridge.js" },
+  "dependencies": { "mysql2": "^3.11.0", "ws": "^8.18.0" }
+}
